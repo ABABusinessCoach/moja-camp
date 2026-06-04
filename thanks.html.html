@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thank You | Camp Moja</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/quicksand@5/index.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:   #355574;
+      --aqua:   #6dccc2;
+      --pink:   #df76b6;
+      --orange: #e66d38;
+      --yellow: #efd35c;
+      --white:  #ffffff;
+      --text:   #2b3a4a;
+      --light-bg: #f6fafa;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* ── BLOBS ── */
+    .blobs {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 60% 40% 70% 30% / 50% 60% 40% 70%;
+      opacity: 0.15;
+    }
+    .blob-1 { width: 480px; height: 420px; background: var(--aqua);  top: -100px; left: -120px; border-radius: 70% 30% 60% 40% / 40% 70% 30% 60%; }
+    .blob-2 { width: 380px; height: 340px; background: var(--pink);  top: -60px;  right: -80px; border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%; }
+    .blob-3 { width: 360px; height: 320px; background: var(--aqua);  bottom: 60px; right: -60px; border-radius: 55% 45% 65% 35% / 45% 55% 45% 55%; }
+    .blob-4 { width: 300px; height: 280px; background: var(--yellow); bottom: 30px; left: -80px; border-radius: 45% 55% 35% 65% / 65% 35% 65% 35%; opacity: 0.10; }
+
+    /* ── PAGE WRAP ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 680px;
+      padding: 60px 32px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ── LOGO ── */
+    .logo-area {
+      margin-bottom: 36px;
+      text-align: center;
+    }
+    .logo-area img {
+      height: 64px;
+      width: auto;
+    }
+    .logo-wordmark {
+      display: block;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--blue);
+      margin-top: 8px;
+      text-transform: uppercase;
+    }
+
+    /* ── CHECKMARK BADGE ── */
+    .badge {
+      width: 80px; height: 80px;
+      background: var(--aqua);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      box-shadow: 0 6px 28px rgba(109,204,194,0.35);
+      animation: popIn 0.5s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .badge svg { width: 38px; height: 38px; }
+
+    /* ── HEADLINE ── */
+    h1 {
+      font-size: clamp(28px, 5vw, 38px);
+      font-weight: 700;
+      color: var(--blue);
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      animation: fadeUp 0.5s 0.15s ease both;
+    }
+    .accent-word {
+      color: var(--pink);
+    }
+
+    .subhead {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--blue);
+      opacity: 0.75;
+      text-align: center;
+      margin-bottom: 40px;
+      animation: fadeUp 0.5s 0.25s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { transform: translateY(18px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--aqua);
+      border-radius: 4px;
+      margin: 0 auto 36px;
+      animation: fadeUp 0.5s 0.3s ease both;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--light-bg);
+      border-radius: 24px;
+      padding: 36px 40px;
+      width: 100%;
+      border: 1.5px solid rgba(109,204,194,0.25);
+      animation: fadeUp 0.5s 0.35s ease both;
+      margin-bottom: 28px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-title-icon {
+      width: 30px; height: 30px;
+      background: var(--aqua);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-title-icon svg { width: 16px; height: 16px; }
+
+    .card p {
+      font-size: 15.5px;
+      font-weight: 600;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .card p + p {
+      margin-top: 14px;
+    }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight {
+      background: white;
+      border-left: 4px solid var(--pink);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin-top: 20px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--blue);
+      line-height: 1.65;
+    }
+
+    /* ── NEXT STEPS ── */
+    .steps-card {
+      background: var(--blue);
+      border-radius: 24px;
+      padding: 36px 40px;
+      width: 100%;
+      color: white;
+      animation: fadeUp 0.5s 0.45s ease both;
+      margin-bottom: 28px;
+    }
+    .steps-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 22px;
+      opacity: 0.95;
+    }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .step:last-child { margin-bottom: 0; }
+    .step-num {
+      width: 30px; height: 30px;
+      background: var(--aqua);
+      color: var(--blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-text {
+      font-size: 15.5px;
+      font-weight: 600;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.92);
+    }
+    .step-text strong {
+      color: var(--aqua);
+      font-weight: 700;
+    }
+
+    /* ── FOOTER NOTE ── */
+    .footer-note {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--blue);
+      opacity: 0.6;
+      text-align: center;
+      animation: fadeUp 0.5s 0.55s ease both;
+      line-height: 1.6;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 520px) {
+      .page { padding: 40px 20px 60px; }
+      .card, .steps-card { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- background blobs -->
+  <div class="blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+  </div>
+
+  <div class="page">
+
+    <!-- Logo -->
+    <div class="logo-area">
+      <!-- Inline SVG approximation of the Moja wordmark for portability -->
+      <svg width="130" height="56" viewBox="0 0 260 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- dot accents -->
+        <circle cx="112" cy="12" r="10" fill="#df76b6"/>
+        <circle cx="130" cy="7"  r="12" fill="#6dccc2"/>
+        <!-- M-shape path (simplified brand mark) -->
+        <path d="M90 85 Q85 30 100 50 Q112 70 130 40 Q148 10 160 50 Q175 70 180 85" stroke="#355574" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <!-- "oja" text simulation via rects+text -->
+        <text x="96" y="98" font-family="'Quicksand',sans-serif" font-weight="700" font-size="26" fill="#355574" letter-spacing="1">Moja</text>
+      </svg>
+      <span class="logo-wordmark">Behavioral Services</span>
+    </div>
+
+    <!-- Check badge -->
+    <div class="badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+
+    <!-- Headline -->
+    <h1>You're on your way to <span class="accent-word">Camp Moja!</span></h1>
+    <p class="subhead">We're so glad you reached out. 🎉</p>
+    <div class="divider"></div>
+
+    <!-- About Camp -->
+    <div class="card">
+      <div class="card-title">
+        <div class="card-title-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/>
+          </svg>
+        </div>
+        A note about Camp Moja
+      </div>
+      <p>
+        Camp Moja is a fee-based program designed to bring joy, connection, and meaningful skill-building to every child who attends. Our team will be in touch soon with details about registration, scheduling, and program fees.
+      </p>
+
+      <div class="highlight">
+        💙 <strong>Does your child have an autism diagnosis?</strong><br>
+        If your child has a diagnosis and your family is interested in ABA therapy services through Moja Behavioral, there may be a pathway for your child to participate in camp as part of their clinical programming — potentially at no out-of-pocket cost to you, depending on your insurance coverage.<br><br>
+        To explore this option, we'll first want to connect with you to learn more about your child's needs and determine the right fit. Our team will reach out to schedule a brief conversation.
+      </div>
+
+      <div class="highlight" style="border-left-color: var(--aqua); margin-top: 14px;">
+        🌟 <strong>Siblings are always welcome!</strong><br>
+        Brothers and sisters are welcome to join camp on a drop-in basis — a great way for the whole family to be part of the fun. Just let us know when we connect and we'll make sure there's a spot for them.
+      </div>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="steps-card">
+      <div class="steps-title">What happens next</div>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <strong>We'll reach out to you</strong> — a member of our team will contact you using the information you provided.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <strong>We'll have a conversation</strong> — we'll ask a few questions to understand your child and your family's goals, and share everything you need to know about the program.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>We'll find the right path</strong> — whether through direct camp enrollment or a clinical services conversation, we'll make sure your family has clear next steps.
+        </div>
+      </div>
+    </div>
+
+    <p class="footer-note">
+      Questions in the meantime? We'd love to hear from you.<br>
+      <a href="mailto:hello@mojakids.com" style="color:var(--aqua);text-decoration:none;font-weight:700;">hello@mojakids.com</a>
+      &nbsp;·&nbsp;
+      <a href="tel:6037572287" style="color:var(--aqua);text-decoration:none;font-weight:700;">603-757-2287</a>
+    </p>
+
+  </div>
+
+</body>
+</html>
