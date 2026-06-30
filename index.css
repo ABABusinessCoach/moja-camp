@@ -1,0 +1,264 @@
+/* 
+ * MOJA SUMMER CAMP ENROLLMENT HUB — GLOBAL STYLES
+ * Design: Joyful Editorial — Summer Camp Energy
+ * Brand: Moja Behavioral Services
+ *
+ * Color Palette:
+ *   Blue   #355574  — Primary, headers, dominant backgrounds
+ *   Aqua   #6dccc2  — Secondary, buttons, focus rings, dividers
+ *   Pink   #df76b6  — Accent, warmth, family-facing elements
+ *   Orange #e66d38  — Accent only, small pops
+ *   Yellow #efd35c  — Accent only, decorative
+ *
+ * Typography:
+ *   Quicksand (700 bold, 600 semibold) — all text
+ *   Mango AC — hero tagline and accent only
+ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Moja Brand Colors */
+  --moja-blue: oklch(0.36 0.065 234);
+  --moja-aqua: oklch(0.75 0.09 185);
+  --moja-pink: oklch(0.68 0.18 330);
+  --moja-orange: oklch(0.67 0.17 45);
+  --moja-yellow: oklch(0.87 0.14 85);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.22 0.04 234);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.04 234);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.04 234);
+  --primary: oklch(0.36 0.065 234);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.96 0.015 185);
+  --secondary-foreground: oklch(0.36 0.065 234);
+  --muted: oklch(0.97 0.005 234);
+  --muted-foreground: oklch(0.55 0.03 234);
+  --accent: oklch(0.75 0.09 185);
+  --accent-foreground: oklch(0.22 0.04 234);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.91 0.015 234);
+  --input: oklch(0.91 0.015 234);
+  --ring: oklch(0.75 0.09 185);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+
+  /* Moja Blob Accent */
+  .moja-blob {
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 70%;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  /* Mango AC font class */
+  .font-mango {
+    font-family: 'Mango AC', 'Comic Sans MS', cursive;
+    font-weight: 400;
+  }
+
+  /* Pathway card hover lift */
+  .pathway-card {
+    transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 200ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .pathway-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -8px rgba(53, 85, 116, 0.2);
+  }
+
+  /* Form input focus with Aqua ring */
+  .moja-input {
+    border: 1.5px solid oklch(0.91 0.015 234);
+    border-radius: 0.5rem;
+    padding: 0.625rem 0.875rem;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    width: 100%;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+    outline: none;
+    background: white;
+    color: oklch(0.22 0.04 234);
+  }
+  .moja-input:focus {
+    border-color: oklch(0.75 0.09 185);
+    box-shadow: 0 0 0 3px oklch(0.75 0.09 185 / 0.2);
+  }
+  .moja-input::placeholder {
+    color: oklch(0.65 0.02 234);
+  }
+
+  /* Aqua CTA button */
+  .btn-aqua {
+    background: oklch(0.75 0.09 185);
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.75rem 2rem;
+    border-radius: 0.625rem;
+    border: none;
+    transition: background 150ms ease, transform 100ms ease, box-shadow 150ms ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-aqua:hover {
+    background: oklch(0.68 0.1 185);
+    box-shadow: 0 4px 16px oklch(0.75 0.09 185 / 0.4);
+  }
+  .btn-aqua:active {
+    transform: scale(0.97);
+  }
+
+  /* Pink success button */
+  .btn-pink {
+    background: oklch(0.68 0.18 330);
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.75rem 2rem;
+    border-radius: 0.625rem;
+    border: none;
+    transition: background 150ms ease, transform 100ms ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-pink:active {
+    transform: scale(0.97);
+  }
+
+  /* Section label with Mango AC */
+  .section-label {
+    font-family: 'Mango AC', 'Comic Sans MS', cursive;
+    color: oklch(0.75 0.09 185);
+    font-size: 1.25rem;
+    letter-spacing: 0.01em;
+  }
+
+  /* Fade-up animation for page entrance */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 400ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  .animate-fade-up-1 { animation-delay: 0ms; }
+  .animate-fade-up-2 { animation-delay: 80ms; }
+  .animate-fade-up-3 { animation-delay: 160ms; }
+  .animate-fade-up-4 { animation-delay: 240ms; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-up {
+      animation: none;
+    }
+  }
+}
